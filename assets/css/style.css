@@ -1,0 +1,835 @@
+/* assets/css/style.css — Gökyüzü Air Premium Airline */
+:root {
+  --sky-dark:   #04091f;
+  --sky-navy:   #0a1535;
+  --sky-blue:   #1a3a6e;
+  --sky-accent: #e8a020;
+  --sky-gold:   #f0c040;
+  --sky-light:  #e8edf8;
+  --sky-white:  #ffffff;
+  --sky-red:    #d63031;
+  --sky-green:  #00b894;
+  --radius:     12px;
+  --shadow:     0 8px 40px rgba(4,9,31,0.18);
+  --trans:      0.22s cubic-bezier(.4,0,.2,1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--sky-dark);
+  color: var(--sky-white);
+  min-height: 100vh;
+}
+
+/* ── NAVBAR ── */
+.navbar {
+  position: sticky; top: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 2rem;
+  height: 64px;
+  background: rgba(4,9,31,0.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(232,160,32,0.15);
+}
+.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.logo-icon { font-size: 1.5rem; }
+.logo-text { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--sky-white); letter-spacing: -0.5px; }
+.logo-text em { color: var(--sky-accent); font-style: normal; }
+.nav-actions { display: flex; align-items: center; gap: 12px; }
+.user-badge { display: flex; align-items: center; gap: 8px; }
+.user-avatar {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--sky-accent), var(--sky-gold));
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 0.9rem; color: var(--sky-dark);
+}
+.user-name { font-size: 0.9rem; color: var(--sky-light); }
+.btn-nav { padding: 8px 20px; border-radius: 999px; font-size: 0.88rem; font-weight: 600; text-decoration: none; transition: var(--trans); }
+.btn-outline { border: 1.5px solid rgba(255,255,255,0.25); color: var(--sky-white); }
+.btn-outline:hover { border-color: var(--sky-accent); color: var(--sky-accent); }
+.btn-primary { background: linear-gradient(135deg, var(--sky-accent), var(--sky-gold)); color: var(--sky-dark); }
+.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 4px 20px rgba(232,160,32,0.4); }
+
+/* ── HERO ── */
+.hero {
+  position: relative; overflow: hidden;
+  min-height: 480px;
+  display: flex; align-items: center; justify-content: center; flex-direction: column;
+  text-align: center;
+  background: linear-gradient(160deg, #04091f 0%, #0a1535 50%, #142050 100%);
+  padding: 4rem 2rem 5rem;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 70% 60% at 50% 30%, rgba(26,58,110,0.6) 0%, transparent 70%);
+}
+.hero-plane {
+  position: absolute; top: 20%; right: 5%;
+  font-size: 6rem; opacity: 0.06;
+  transform: rotate(-15deg);
+  animation: float 8s ease-in-out infinite;
+}
+@keyframes float { 0%,100%{transform:rotate(-15deg) translateY(0)} 50%{transform:rotate(-15deg) translateY(-18px)} }
+.hero-tag {
+  position: relative;
+  display: inline-block; margin-bottom: 1rem;
+  padding: 6px 18px; border-radius: 999px;
+  border: 1px solid var(--sky-accent);
+  color: var(--sky-accent); font-size: 0.8rem; font-weight: 600; letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.hero h1 {
+  position: relative;
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 5vw, 3.8rem);
+  font-weight: 900; line-height: 1.1;
+  margin-bottom: 1rem;
+}
+.hero h1 em { color: var(--sky-accent); font-style: normal; }
+.hero p { position: relative; color: rgba(255,255,255,0.65); font-size: 1.05rem; margin-bottom: 2.5rem; }
+
+/* ── SEARCH CARD ── */
+.search-card {
+  position: relative; z-index: 2;
+  background: rgba(10,21,53,0.95);
+  border: 1px solid rgba(232,160,32,0.2);
+  border-radius: var(--radius);
+  padding: 2rem;
+  width: 100%; max-width: 900px;
+  margin: 0 auto;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(20px);
+}
+.search-tabs { display: flex; gap: 8px; margin-bottom: 1.5rem; }
+.search-tab { padding: 8px 20px; border-radius: 999px; border: 1.5px solid rgba(255,255,255,0.15); background: transparent; color: rgba(255,255,255,0.6); cursor: pointer; font-size: 0.88rem; font-family: 'DM Sans', sans-serif; transition: var(--trans); }
+.search-tab.active { background: var(--sky-accent); border-color: var(--sky-accent); color: var(--sky-dark); font-weight: 600; }
+.search-grid { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr auto; gap: 12px; align-items: end; }
+@media(max-width:768px) { .search-grid { grid-template-columns: 1fr 1fr; } }
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+.form-group label { font-size: 0.75rem; font-weight: 600; color: var(--sky-accent); letter-spacing: 0.8px; text-transform: uppercase; }
+.form-group select,
+.form-group input {
+  width: 100%; padding: 12px 14px;
+  background: rgba(255,255,255,0.06); border: 1.5px solid rgba(255,255,255,0.1);
+  border-radius: 8px; color: var(--sky-white); font-size: 0.95rem; font-family: 'DM Sans', sans-serif;
+  transition: var(--trans); outline: none; appearance: none;
+}
+.form-group select:focus, .form-group input:focus {
+  border-color: var(--sky-accent); background: rgba(232,160,32,0.05);
+}
+.form-group select option { background: var(--sky-navy); color: var(--sky-white); }
+.btn-search {
+  padding: 13px 28px; border-radius: 8px; border: none; cursor: pointer;
+  background: linear-gradient(135deg, var(--sky-accent), var(--sky-gold));
+  color: var(--sky-dark); font-size: 1rem; font-weight: 700; font-family: 'DM Sans', sans-serif;
+  transition: var(--trans); white-space: nowrap;
+}
+.btn-search:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(232,160,32,0.5); }
+
+/* ── PAGE WRAPPER ── */
+.page-wrapper { max-width: 1100px; margin: 0 auto; padding: 3rem 2rem; }
+.page-title {
+  font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+.page-subtitle { color: rgba(255,255,255,0.5); font-size: 0.95rem; margin-bottom: 2rem; }
+
+/* ── FLIGHT CARDS ── */
+.flight-list { display: flex; flex-direction: column; gap: 14px; }
+.flight-card {
+  background: rgba(10,21,53,0.8); border: 1.5px solid rgba(255,255,255,0.07);
+  border-radius: var(--radius); padding: 1.5rem; cursor: pointer;
+  transition: var(--trans); display: grid; align-items: center;
+  grid-template-columns: auto 1fr auto auto;
+  gap: 1.5rem;
+}
+.flight-card:hover { border-color: var(--sky-accent); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(232,160,32,0.12); }
+.flight-airline { display: flex; flex-direction: column; align-items: center; gap: 4px; min-width: 80px; }
+.airline-code {
+  width: 48px; height: 48px; border-radius: 12px;
+  background: linear-gradient(135deg, var(--sky-blue), #1e4fa0);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 0.85rem; color: var(--sky-accent);
+}
+.airline-name { font-size: 0.7rem; color: rgba(255,255,255,0.5); text-align: center; }
+.flight-route { display: flex; align-items: center; gap: 1rem; }
+.flight-time-block { text-align: center; }
+.flight-time { font-size: 1.5rem; font-weight: 700; line-height: 1; }
+.flight-city { font-size: 0.75rem; color: rgba(255,255,255,0.5); margin-top: 2px; }
+.flight-duration { display: flex; flex-direction: column; align-items: center; gap: 4px; flex: 1; }
+.duration-line { width: 100%; height: 1px; background: rgba(255,255,255,0.15); position: relative; }
+.duration-line::before { content: '✈'; position: absolute; top: -9px; left: 50%; transform: translateX(-50%); font-size: 0.8rem; color: var(--sky-accent); }
+.duration-text { font-size: 0.75rem; color: rgba(255,255,255,0.5); }
+.flight-class-badge {
+  padding: 4px 12px; border-radius: 999px; font-size: 0.72rem; font-weight: 600;
+  background: rgba(232,160,32,0.1); border: 1px solid rgba(232,160,32,0.3); color: var(--sky-accent);
+}
+.flight-price { text-align: right; }
+.price-amount { font-size: 1.8rem; font-weight: 700; color: var(--sky-accent); line-height: 1; }
+.price-label { font-size: 0.72rem; color: rgba(255,255,255,0.4); }
+.flight-no { font-size: 0.7rem; color: rgba(255,255,255,0.3); margin-top: 4px; }
+.select-btn {
+  padding: 10px 22px; border-radius: 8px; border: none; cursor: pointer;
+  background: linear-gradient(135deg, var(--sky-accent), var(--sky-gold));
+  color: var(--sky-dark); font-weight: 700; font-size: 0.88rem; font-family: 'DM Sans', sans-serif;
+  transition: var(--trans);
+}
+.select-btn:hover { transform: scale(1.04); }
+
+/* ── SEAT MAP ── */
+.seat-container { max-width: 700px; margin: 0 auto; }
+.aircraft-body {
+  background: rgba(10,21,53,0.8); border: 1.5px solid rgba(255,255,255,0.08);
+  border-radius: 24px; padding: 2rem; position: relative; overflow: hidden;
+}
+.aircraft-nose { text-align: center; font-size: 3rem; margin-bottom: 1rem; opacity: 0.4; }
+.seat-legend { display: flex; gap: 16px; justify-content: center; margin-bottom: 1.5rem; flex-wrap: wrap; }
+.legend-item { display: flex; align-items: center; gap: 6px; font-size: 0.8rem; color: rgba(255,255,255,0.6); }
+.legend-dot { width: 18px; height: 18px; border-radius: 4px; }
+.legend-dot.available { background: rgba(255,255,255,0.15); border: 1.5px solid rgba(255,255,255,0.2); }
+.legend-dot.selected  { background: var(--sky-accent); }
+.legend-dot.occupied  { background: var(--sky-red); }
+.seat-class-divider {
+  text-align: center; padding: 8px; margin: 12px 0;
+  border-top: 1px dashed rgba(255,255,255,0.1);
+  border-bottom: 1px dashed rgba(255,255,255,0.1);
+  font-size: 0.75rem; color: rgba(255,255,255,0.4); letter-spacing: 2px; text-transform: uppercase;
+}
+.seat-row { display: flex; align-items: center; justify-content: center; gap: 6px; margin-bottom: 6px; }
+.seat-row-num { width: 24px; text-align: center; font-size: 0.72rem; color: rgba(255,255,255,0.3); }
+.seat-aisle { width: 24px; }
+.seat {
+  width: 36px; height: 36px; border-radius: 6px 6px 4px 4px;
+  border: 1.5px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.06);
+  cursor: pointer; transition: var(--trans); font-size: 0.72rem; font-weight: 600;
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,0.5); font-family: 'DM Sans', sans-serif;
+}
+.seat:hover:not(.occupied):not(.selected) { background: rgba(232,160,32,0.2); border-color: var(--sky-accent); color: var(--sky-accent); }
+.seat.selected { background: var(--sky-accent); border-color: var(--sky-gold); color: var(--sky-dark); font-weight: 700; }
+.seat.occupied { background: rgba(214,48,49,0.25); border-color: var(--sky-red); color: var(--sky-red); cursor: not-allowed; }
+.selected-seat-info {
+  margin-top: 1.5rem; text-align: center;
+  padding: 1rem; border-radius: 8px;
+  background: rgba(232,160,32,0.08); border: 1px solid rgba(232,160,32,0.2);
+}
+.selected-seat-info span { color: var(--sky-accent); font-weight: 700; font-size: 1.1rem; }
+
+/* ── FORM CARD ── */
+.form-card {
+  background: rgba(10,21,53,0.8); border: 1.5px solid rgba(255,255,255,0.07);
+  border-radius: var(--radius); padding: 2rem; margin-bottom: 1.5rem;
+}
+.form-card h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; margin-bottom: 1.5rem; color: var(--sky-accent); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+@media(max-width:600px) { .form-row { grid-template-columns: 1fr; } }
+.form-full { margin-bottom: 1rem; }
+.form-group-dark label { font-size: 0.78rem; font-weight: 600; color: rgba(255,255,255,0.5); letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 6px; display: block; }
+.form-group-dark input,
+.form-group-dark select {
+  width: 100%; padding: 12px 14px;
+  background: rgba(255,255,255,0.05); border: 1.5px solid rgba(255,255,255,0.1);
+  border-radius: 8px; color: var(--sky-white); font-size: 0.95rem; font-family: 'DM Sans', sans-serif;
+  transition: var(--trans); outline: none; appearance: none;
+}
+.form-group-dark input:focus, .form-group-dark select:focus { border-color: var(--sky-accent); }
+.form-group-dark select option { background: var(--sky-navy); }
+
+/* ── BUTTONS ── */
+.btn-continue {
+  width: 100%; padding: 15px; border-radius: 10px; border: none; cursor: pointer;
+  background: linear-gradient(135deg, var(--sky-accent), var(--sky-gold));
+  color: var(--sky-dark); font-size: 1.05rem; font-weight: 700; font-family: 'DM Sans', sans-serif;
+  transition: var(--trans); margin-top: 1rem;
+}
+.btn-continue:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(232,160,32,0.4); }
+.btn-back {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 10px 20px; border-radius: 8px; border: 1.5px solid rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.7); background: transparent; cursor: pointer;
+  font-family: 'DM Sans', sans-serif; font-size: 0.9rem; text-decoration: none;
+  transition: var(--trans); margin-bottom: 1.5rem;
+}
+.btn-back:hover { border-color: var(--sky-accent); color: var(--sky-accent); }
+
+/* ── FLIGHT SUMMARY BOX ── */
+.flight-summary {
+  background: rgba(232,160,32,0.05); border: 1px solid rgba(232,160,32,0.2);
+  border-radius: var(--radius); padding: 1.2rem 1.5rem;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem;
+}
+.summary-route { font-size: 1.2rem; font-weight: 700; }
+.summary-meta { font-size: 0.82rem; color: rgba(255,255,255,0.5); margin-top: 2px; }
+.summary-price { font-size: 1.8rem; font-weight: 700; color: var(--sky-accent); }
+
+/* ── TICKET ── */
+.ticket-wrapper {
+  max-width: 680px; margin: 0 auto;
+  background: linear-gradient(135deg, #fff 0%, #f8f3e8 100%);
+  border-radius: 20px; overflow: hidden; box-shadow: 0 20px 80px rgba(0,0,0,0.4);
+  color: #111; position: relative;
+}
+.ticket-header {
+  background: linear-gradient(135deg, var(--sky-navy), var(--sky-blue));
+  padding: 1.5rem 2rem; display: flex; justify-content: space-between; align-items: center;
+}
+.ticket-logo { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: #fff; }
+.ticket-logo em { color: var(--sky-accent); font-style: normal; }
+.ticket-no { font-size: 0.75rem; color: rgba(255,255,255,0.5); }
+.ticket-no strong { display: block; color: var(--sky-accent); font-size: 1rem; letter-spacing: 2px; }
+.ticket-body { padding: 2rem; }
+.ticket-route { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
+.ticket-city { flex: 1; }
+.ticket-city-code { font-size: 2.5rem; font-weight: 900; font-family: 'Playfair Display', serif; line-height: 1; color: var(--sky-navy); }
+.ticket-city-name { font-size: 0.8rem; color: #666; margin-top: 2px; }
+.ticket-route-mid { flex: 2; text-align: center; }
+.ticket-route-line { height: 1px; background: #ddd; position: relative; margin: 12px 0; }
+.ticket-route-line::before { content: '✈'; position: absolute; top: -10px; left: 50%; transform: translateX(-50%); font-size: 1rem; color: var(--sky-accent); background: white; padding: 0 4px; }
+.ticket-duration { font-size: 0.75rem; color: #999; }
+.ticket-varis { text-align: right; }
+.ticket-divider {
+  border: none; border-top: 2px dashed #ddd; margin: 1rem 0;
+  position: relative;
+}
+.ticket-divider::before,
+.ticket-divider::after {
+  content: '';
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 20px; height: 20px; background: var(--sky-dark); border-radius: 50%;
+}
+.ticket-divider::before { left: -32px; }
+.ticket-divider::after  { right: -32px; }
+.ticket-info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+.ticket-info-item label { font-size: 0.7rem; color: #999; text-transform: uppercase; letter-spacing: 1px; }
+.ticket-info-item span { display: block; font-size: 0.95rem; font-weight: 600; color: #111; margin-top: 2px; }
+.ticket-seat-badge {
+  display: inline-block; padding: 6px 18px; border-radius: 8px;
+  background: var(--sky-accent); color: var(--sky-dark); font-weight: 700; font-size: 1.1rem;
+}
+.ticket-barcode {
+  text-align: center; padding: 1.5rem; background: #f5f0e8;
+  font-size: 0.65rem; color: #aaa; letter-spacing: 6px; font-family: monospace;
+}
+.ticket-barcode-bars {
+  display: flex; justify-content: center; gap: 2px; margin-bottom: 8px;
+}
+.ticket-barcode-bars span {
+  display: inline-block; width: 3px; background: #333;
+  height: 40px;
+}
+.ticket-barcode-bars span:nth-child(even) { height: 30px; width: 2px; opacity: 0.5; }
+
+/* ── AUTH PAGES ── */
+.auth-wrapper {
+  min-height: calc(100vh - 64px); display: flex; align-items: center; justify-content: center;
+  padding: 3rem 1rem;
+  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(26,58,110,0.3) 0%, transparent 60%);
+}
+.auth-card {
+  background: rgba(10,21,53,0.95); border: 1.5px solid rgba(232,160,32,0.15);
+  border-radius: 20px; padding: 2.5rem; width: 100%; max-width: 440px;
+  box-shadow: var(--shadow);
+}
+.auth-card h2 { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 0.4rem; }
+.auth-card p { color: rgba(255,255,255,0.5); font-size: 0.9rem; margin-bottom: 2rem; }
+.auth-link { text-align: center; margin-top: 1.5rem; font-size: 0.9rem; color: rgba(255,255,255,0.5); }
+.auth-link a { color: var(--sky-accent); text-decoration: none; font-weight: 600; }
+.alert { padding: 12px 16px; border-radius: 8px; font-size: 0.88rem; margin-bottom: 1rem; }
+.alert-error { background: rgba(214,48,49,0.15); border: 1px solid rgba(214,48,49,0.3); color: #ff7675; }
+.alert-success { background: rgba(0,184,148,0.15); border: 1px solid rgba(0,184,148,0.3); color: #55efc4; }
+
+/* ── STEP INDICATOR ── */
+.steps { display: flex; justify-content: center; gap: 0; margin-bottom: 2.5rem; }
+.step-item { display: flex; align-items: center; }
+.step-dot {
+  width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-size: 0.8rem; font-weight: 700; border: 2px solid rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.3); background: transparent; transition: var(--trans);
+}
+.step-dot.active { background: var(--sky-accent); border-color: var(--sky-accent); color: var(--sky-dark); }
+.step-dot.done { background: var(--sky-green); border-color: var(--sky-green); color: white; }
+.step-label { font-size: 0.7rem; color: rgba(255,255,255,0.4); margin-top: 4px; text-align: center; display: block; }
+.step-item { flex-direction: column; align-items: center; gap: 4px; }
+.step-line { width: 60px; height: 1px; background: rgba(255,255,255,0.1); margin-bottom: 20px; }
+.step-line.done { background: var(--sky-green); }
+
+/* ── FOOTER ── */
+.footer {
+  border-top: 1px solid rgba(255,255,255,0.05);
+  padding: 2rem;
+  text-align: center;
+}
+.footer-brand { font-family: 'Playfair Display', serif; font-size: 1.1rem; margin-bottom: 0.5rem; }
+.footer-copy { color: rgba(255,255,255,0.3); font-size: 0.8rem; }
+
+/* ── NO RESULTS ── */
+.no-results {
+  text-align: center; padding: 4rem 2rem;
+  background: rgba(10,21,53,0.5); border-radius: var(--radius);
+  border: 1px dashed rgba(255,255,255,0.1);
+}
+.no-results .icon { font-size: 3rem; margin-bottom: 1rem; opacity: 0.4; }
+.no-results p { color: rgba(255,255,255,0.5); }
+
+/* ── QR SECTION ── */
+.ticket-qr-section {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.2rem 2rem;
+  background: linear-gradient(135deg, #f5f0e8, #ede8d8);
+  border-top: 2px dashed #ddd;
+}
+.ticket-qr-left { flex: 1; }
+.qr-label { font-size: 0.65rem; font-weight: 700; color: #999; letter-spacing: 2px; text-transform: uppercase; }
+.qr-sub { font-size: 0.78rem; color: #555; margin-top: 3px; }
+.ticket-qr-img { flex-shrink: 0; }
+
+/* ── PRINT ── */
+@media print {
+  body { background: white; }
+  .navbar, .footer, .btn-back, .btn-continue, .steps { display: none; }
+  .ticket-wrapper { box-shadow: none; }
+}
+
+/* ── AÇIK ARKA PLAN SAYFALARI ── */
+.flights-page, .light-page {
+  background: #eef2f9;
+  min-height: calc(100vh - 64px);
+}
+.flights-page .page-wrapper,
+.light-page .page-wrapper {
+  max-width: 1100px; margin: 0 auto; padding: 2.5rem 2rem;
+}
+.flights-page .page-title,
+.light-page .page-title { color: #0a1535; }
+.flights-page .page-subtitle,
+.light-page .page-subtitle { color: #666; }
+.flights-page .btn-back,
+.light-page .btn-back { color: #0a1535; border-color: #ccd5e8; }
+.flights-page .btn-back:hover,
+.light-page .btn-back:hover { border-color: #e8a020; color: #e8a020; }
+.flights-page .steps .step-dot { border-color: #ccd5e8; color: #aaa; }
+.flights-page .steps .step-label { color: #999; }
+.flights-page .steps .step-dot.active { background:#e8a020;border-color:#e8a020;color:#fff; }
+.flights-page .steps .step-dot.done  { background:#00b894;border-color:#00b894;color:#fff; }
+.flights-page .steps .step-line { background: #dde3ef; }
+.flights-page .steps .step-line.done { background: #00b894; }
+.light-page .steps .step-dot { border-color: #ccd5e8; color: #aaa; background: #fff; }
+.light-page .steps .step-label { color: #999; }
+.light-page .steps .step-dot.done { background:#00b894;border-color:#00b894;color:#fff; }
+.light-page .steps .step-line { background: #dde3ef; }
+.light-page .steps .step-line.done { background: #00b894; }
+
+/* ── FİLTRE ÇUBUĞU ── */
+.filter-bar {
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  background: #fff; border-radius: 12px;
+  padding: 0.9rem 1.2rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 12px rgba(10,21,53,0.07);
+  border: 1px solid #e0e7f0;
+}
+.filter-label { font-size: 0.78rem; font-weight: 700; color: #aaa; text-transform: uppercase; letter-spacing: 0.8px; margin-right: 4px; }
+.filter-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 7px 16px; border-radius: 999px;
+  font-size: 0.85rem; font-weight: 500;
+  color: #555; background: #f0f3fa;
+  border: 1.5px solid transparent;
+  text-decoration: none; transition: all 0.18s ease;
+  cursor: pointer;
+}
+.filter-btn:hover { background: #e3eaf7; color: #0a1535; }
+.filter-btn.active {
+  background: #0a1535; color: #fff;
+  border-color: #0a1535; font-weight: 600;
+}
+.filter-from { font-size: 0.72rem; opacity: 0.7; font-style: normal; margin-left: 2px; }
+
+/* ── UÇUŞ KARTI (AÇIK) ── */
+.flights-page .flight-card {
+  background: #fff;
+  border: 1.5px solid #e0e7f0;
+  border-radius: 14px;
+  padding: 1.4rem 1.6rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: grid;
+  grid-template-columns: auto 1fr auto auto auto;
+  gap: 1.5rem; align-items: center;
+  position: relative;
+  box-shadow: 0 2px 8px rgba(10,21,53,0.05);
+  margin-bottom: 12px;
+}
+.flights-page .flight-card:hover {
+  border-color: #e8a020; transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(232,160,32,0.15);
+}
+.flights-page .flight-card-featured {
+  border-color: #e8a020;
+  background: linear-gradient(135deg, #fffdf5, #fff);
+  box-shadow: 0 4px 20px rgba(232,160,32,0.18);
+}
+.flights-page .airline-code {
+  width: 50px; height: 50px; border-radius: 12px;
+  background: linear-gradient(135deg, #0a1535, #1a3a6e);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 0.85rem; color: #e8a020;
+}
+.flights-page .airline-name { font-size: 0.7rem; color: #aaa; text-align: center; margin-top: 4px; }
+.flights-page .flight-time { font-size: 1.5rem; font-weight: 700; color: #0a1535; }
+.flights-page .flight-city { font-size: 0.75rem; color: #aaa; }
+.flights-page .duration-line { height: 1px; background: #ddd; }
+.flights-page .duration-line::before { color: #e8a020; background: #fff; }
+.flights-page .duration-text { font-size: 0.75rem; color: #999; }
+.flights-page .flight-class-badge {
+  background: #eef2f9; border: 1px solid #d0daea;
+  color: #0a1535; padding: 4px 12px; border-radius: 999px;
+  font-size: 0.72rem; font-weight: 600;
+}
+.flights-page .flight-no { font-size: 0.7rem; color: #ccc; margin-top: 4px; }
+.flights-page .price-amount { font-size: 1.8rem; font-weight: 700; color: #e8a020; }
+.flights-page .price-label { font-size: 0.72rem; color: #bbb; }
+.flights-page .select-btn {
+  background: linear-gradient(135deg, #e8a020, #f0c040);
+  color: #111; border: none; padding: 10px 22px;
+  border-radius: 8px; font-weight: 700; cursor: pointer;
+  font-family: 'DM Sans', sans-serif; font-size: 0.88rem;
+  transition: all 0.18s ease;
+}
+.flights-page .select-btn:hover { transform: scale(1.04); }
+.flights-page .no-results {
+  background: #fff; border: 1.5px dashed #dde3ef;
+}
+.flights-page .no-results p { color: #999; }
+
+/* ── ROZET ── */
+.flight-badges { position: absolute; top: -1px; left: 16px; display: flex; gap: 6px; }
+.badge {
+  font-size: 0.68rem; font-weight: 700; padding: 3px 10px; border-radius: 0 0 8px 8px;
+}
+.badge-cheap { background: #e8a020; color: #111; }
+.badge-fast  { background: #0a1535; color: #fff; }
+
+/* ── BİLGİLENDİRME PANELİ ── */
+.info-panel {
+  margin-top: 2rem;
+  background: #fff; border-radius: 16px;
+  padding: 2rem; border: 1px solid #e0e7f0;
+  box-shadow: 0 2px 12px rgba(10,21,53,0.06);
+}
+.info-panel-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem; color: #0a1535;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 2px solid #eef2f9;
+}
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+}
+.info-card {
+  border-radius: 12px; padding: 1.2rem;
+  display: flex; gap: 1rem; align-items: flex-start;
+  border-left: 4px solid transparent;
+}
+.info-card-warning { background: #fff8ec; border-left-color: #e8a020; }
+.info-card-blue    { background: #eef4ff; border-left-color: #3b82f6; }
+.info-card-green   { background: #edfaf5; border-left-color: #00b894; }
+.info-card-purple  { background: #f5f0ff; border-left-color: #8b5cf6; }
+.info-card-orange  { background: #fff0ec; border-left-color: #ef4444; }
+.info-card-teal    { background: #edfafa; border-left-color: #0891b2; }
+.info-icon { font-size: 1.6rem; flex-shrink: 0; margin-top: 2px; }
+.info-content strong { display: block; font-size: 0.9rem; color: #111; margin-bottom: 4px; }
+.info-content p { font-size: 0.82rem; color: #555; line-height: 1.55; }
+.info-content em { font-style: normal; font-weight: 700; color: #0a1535; }
+.info-highlight {
+  margin-top: 8px; padding: 5px 10px; border-radius: 6px;
+  background: rgba(0,0,0,0.05); font-size: 0.78rem; font-weight: 600; color: #333;
+}
+
+/* ── YAZDIR BUTONU (AÇIK SAYFA) ── */
+.btn-print {
+  padding: 12px 28px; border-radius: 999px; border: 2px solid #0a1535;
+  color: #0a1535; background: transparent; font-size: 1rem; font-weight: 600;
+  font-family: 'DM Sans', sans-serif; cursor: pointer; transition: all 0.18s ease;
+}
+.btn-print:hover { background: #0a1535; color: #fff; }
+
+@media print {
+  .info-panel, .steps, .btn-print, .btn-nav, nav, footer { display: none !important; }
+  .light-page { background: white; }
+  .ticket-wrapper { box-shadow: none; max-width: 100%; }
+}
+
+/* ══════════════════════════════════════
+   ANA SAYFA — HERO FOTOĞRAF
+══════════════════════════════════════ */
+.hero {
+  position: relative;
+  min-height: 540px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem 5rem;
+  overflow: hidden;
+  background: #0a1535; /* fallback */
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.hero-bg-img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center 60%;
+  display: block;
+}
+.hero-bg-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(4,9,31,0.55) 0%,
+    rgba(4,9,31,0.45) 50%,
+    rgba(4,9,31,0.70) 100%
+  );
+}
+.hero-content {
+  position: relative; z-index: 2;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.hero-content .hero-tag {
+  display: inline-block; margin-bottom: 1rem;
+  padding: 6px 18px; border-radius: 999px;
+  border: 1px solid var(--sky-accent);
+  color: var(--sky-accent); font-size: 0.8rem;
+  font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
+}
+.hero-content h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  font-weight: 900; line-height: 1.1;
+  color: #fff; margin-bottom: 1rem;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.4);
+}
+.hero-content h1 em { color: var(--sky-accent); font-style: normal; }
+.hero-content p {
+  color: rgba(255,255,255,0.8);
+  font-size: 1.05rem;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.5);
+}
+.hero .search-card { position: relative; z-index: 2; }
+
+/* ══════════════════════════════════════
+   ANA SAYFA — BEYAZ BÖLÜM
+══════════════════════════════════════ */
+body { background: #fff; }
+
+.home-white-section {
+  background: #fff;
+  padding: 3rem 0 4rem;
+}
+.home-white-section .page-wrapper {
+  max-width: 1100px; margin: 0 auto; padding: 0 2rem;
+}
+
+/* Özellik kartları */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 4rem;
+}
+.feature-card {
+  background: #f7f9ff;
+  border: 1.5px solid #e0e8f5;
+  border-radius: 14px;
+  padding: 1.8rem 1.5rem;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+.feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(10,21,53,0.1);
+  border-color: #e8a020;
+}
+.feature-icon { font-size: 2.4rem; margin-bottom: 0.8rem; }
+.feature-title { font-weight: 700; color: #0a1535; margin-bottom: 0.4rem; font-size: 1rem; }
+.feature-desc  { font-size: 0.85rem; color: #888; }
+
+/* Popüler rotalar */
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem; color: #0a1535;
+  margin-bottom: 1.5rem;
+}
+.popular-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 1rem;
+}
+.popular-card {
+  background: linear-gradient(135deg, #0a1535, #1a3a6e);
+  border-radius: 14px; padding: 1.3rem 1rem;
+  text-align: center; text-decoration: none;
+  color: #fff; transition: all 0.2s ease;
+  display: block;
+}
+.popular-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(10,21,53,0.25);
+}
+.popular-route {
+  display: flex; align-items: center; justify-content: center;
+  gap: 8px; margin-bottom: 0.5rem;
+}
+.popular-code { font-weight: 700; font-size: 1rem; letter-spacing: 1px; }
+.popular-arrow { color: #e8a020; font-size: 0.8rem; }
+.popular-cities { font-size: 0.72rem; color: rgba(255,255,255,0.6); margin-bottom: 0.5rem; }
+.popular-price  { font-size: 0.9rem; font-weight: 700; color: #e8a020; }
+
+/* Footer da beyaz arkaplan üzerinde */
+.footer {
+  background: #f7f9ff;
+  border-top: 1px solid #e0e8f5;
+}
+.footer-brand, .footer-copy { color: #888; }
+
+/* ══════════════════════════════════════
+   DÜZELTME — passenger & payment sayfaları
+   page-wrapper içinde flight-summary ve form-card
+   yazıları görünmüyor sorununu gider
+══════════════════════════════════════ */
+
+/* Genel sayfa arkaplanı artık beyaz, 
+   bu yüzden .flight-summary ve .form-card'ı açık renkli yap */
+.page-wrapper .flight-summary {
+  background: #fff;
+  border: 2px solid #e0e8f5;
+  border-radius: 14px;
+  padding: 1.2rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 12px rgba(10,21,53,0.07);
+}
+.page-wrapper .summary-route {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #0a1535;
+}
+.page-wrapper .summary-meta {
+  font-size: 0.82rem;
+  color: #666;
+  margin-top: 2px;
+}
+.page-wrapper .summary-price {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #e8a020;
+}
+
+/* Form kartları da açık yapılıyor */
+.page-wrapper .form-card {
+  background: #fff;
+  border: 1.5px solid #e0e8f5;
+  border-radius: 14px;
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 8px rgba(10,21,53,0.06);
+}
+.page-wrapper .form-card h3 {
+  color: #0a1535;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Form etiketleri ve inputlar açık sayfa için */
+.page-wrapper .form-group-dark label {
+  color: #666;
+}
+.page-wrapper .form-group-dark input,
+.page-wrapper .form-group-dark select {
+  background: #f7f9ff;
+  border: 1.5px solid #d0daea;
+  color: #0a1535;
+}
+.page-wrapper .form-group-dark input::placeholder { color: #aaa; }
+.page-wrapper .form-group-dark input:focus,
+.page-wrapper .form-group-dark select:focus {
+  border-color: #e8a020;
+  background: #fffdf5;
+}
+.page-wrapper .form-group-dark select option {
+  background: #fff;
+  color: #0a1535;
+}
+
+/* page-wrapper'daki step göstergeleri */
+.page-wrapper .steps .step-dot {
+  border-color: #d0daea;
+  color: #aaa;
+  background: #fff;
+}
+.page-wrapper .steps .step-label { color: #aaa; }
+.page-wrapper .steps .step-dot.active { background:#e8a020; border-color:#e8a020; color:#fff; }
+.page-wrapper .steps .step-dot.done  { background:#00b894; border-color:#00b894; color:#fff; }
+.page-wrapper .steps .step-line { background: #dde3ef; }
+.page-wrapper .steps .step-line.done { background: #00b894; }
+
+/* page-title ve subtitle açık sayfalarda */
+.page-wrapper .page-title { color: #0a1535; }
+.page-wrapper .page-subtitle { color: #666; }
+.page-wrapper .btn-back { color: #0a1535; border-color: #ccd5e8; background: #fff; }
+.page-wrapper .btn-back:hover { border-color: #e8a020; color: #e8a020; }
+
+/* Rezervasyon özeti kutusu (payment sağ panel) */
+.page-wrapper .form-card[style*="sticky"] {
+  background: #fff;
+  border: 1.5px solid #e0e8f5;
+  color: #0a1535;
+}
+
+/* btn-continue açık sayfa */
+.page-wrapper .btn-continue {
+  background: linear-gradient(135deg, #e8a020, #f0c040);
+  color: #111;
+}
+
+/* Koltuk sayfası açık arka plan */
+.page-wrapper .aircraft-body {
+  background: #fff;
+  border: 1.5px solid #e0e8f5;
+}
+.page-wrapper .seat {
+  background: #f0f4ff;
+  border-color: #c8d8f0;
+  color: #666;
+}
+.page-wrapper .seat:hover:not(.occupied):not(.selected) {
+  background: rgba(232,160,32,0.15);
+  border-color: #e8a020;
+  color: #e8a020;
+}
+.page-wrapper .seat-class-divider { color: #aaa; border-color: #e0e8f5; }
+.page-wrapper .seat-row-num { color: #ccc; }
+.page-wrapper .selected-seat-info {
+  background: #fffdf0;
+  border-color: #e8a020;
+  color: #333;
+}
+.page-wrapper .selected-seat-info span { color: #e8a020; }

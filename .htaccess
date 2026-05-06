@@ -1,0 +1,17 @@
+RewriteEngine On
+RewriteBase /GokyuzuAir/
+
+# PHP dosyalarını src/modules'ten oku
+RewriteRule ^index\.php$ src/modules/index.module.php [L]
+RewriteRule ^flights\.php$ src/modules/flights.module.php [L]
+RewriteRule ^seats\.php$ src/modules/seats.module.php [L]
+RewriteRule ^passenger\.php$ src/modules/passenger.module.php [L]
+RewriteRule ^payment\.php$ src/modules/payment.module.php [L]
+RewriteRule ^ticket\.php$ src/modules/ticket.module.php [L]
+RewriteRule ^login\.php$ src/modules/login.module.php [L]
+RewriteRule ^register\.php$ src/modules/register.module.php [L]
+RewriteRule ^logout\.php$ src/modules/logout.module.php [L]
+RewriteRule ^bilet_goruntule\.php$ src/modules/bilet_goruntule.module.php [L]
+
+# Ana dizin isteği index'e gitsin
+RewriteRule ^$ src/modules/index.module.php [L]
