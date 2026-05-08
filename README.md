@@ -24,7 +24,3 @@ BGT 132 dersi Final Projesi kapsamında geliştirilen bu sistem, kullanıcılar�
 - Ödeme ekranı (kredi kartı formatlamalı)
 - Dijital bilet tasarımı (yazdırılabilir)
 
-## Ders Değerlendirmesi
-- %40 Vize
-- %30 Final Projesi
-- %30 Final Sınavı
